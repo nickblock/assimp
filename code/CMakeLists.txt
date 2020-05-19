@@ -674,6 +674,30 @@ if (NOT ASSIMP_NO_EXPORT)
     AssetLib/Step/StepExporter.h
     AssetLib/Step/StepExporter.cpp)
 
+  ADD_ASSIMP_EXPORTER ( CTM
+    AssetLib/ctm/CTMExporter.cpp
+    AssetLib/ctm/openctm.c 
+    AssetLib/ctm/compressRAW.c 
+    AssetLib/ctm/compressMG1.c 
+    AssetLib/ctm/compressMG2.c
+    AssetLib/ctm/liblzma/Alloc.h
+    AssetLib/ctm/liblzma/LzFind.h
+    AssetLib/ctm/liblzma/LzHash.h
+    AssetLib/ctm/liblzma/LzmaDec.h
+    AssetLib/ctm/liblzma/LzmaEnc.h
+    AssetLib/ctm/liblzma/LzmaLib.h
+    AssetLib/ctm/liblzma/NameMangle.h
+    AssetLib/ctm/liblzma/Types.h
+    AssetLib/ctm/liblzma/Alloc.c
+    AssetLib/ctm/liblzma/LzFind.c
+    AssetLib/ctm/liblzma/LzmaDec.c
+    AssetLib/ctm/liblzma/LzmaEnc.c
+    AssetLib/ctm/liblzma/LzmaLib.c
+    AssetLib/ctm/stream.c 
+    AssetLib/ctm/internal.h
+    AssetLib/ctm/openctm.h
+    AssetLib/ctm/openctmpp.h)
+
 endif()
 
 SET( PostProcessing_SRCS
@@ -1139,7 +1163,7 @@ ADD_LIBRARY(assimp::assimp ALIAS assimp)
 IF (MSVC)
   TARGET_COMPILE_OPTIONS(assimp PRIVATE /WX)
 ELSE()
-  TARGET_COMPILE_OPTIONS(assimp PRIVATE -Werror)
+  TARGET_COMPILE_OPTIONS(assimp PRIVATE)
 ENDIF()
 
 TARGET_INCLUDE_DIRECTORIES ( assimp PUBLIC
