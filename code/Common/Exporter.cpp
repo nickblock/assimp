@@ -139,6 +139,10 @@ void ExportSceneM3DA(const char*, IOSystem*, const aiScene*, const ExportPropert
 void ExportAssimp2Json(const char* , IOSystem*, const aiScene* , const Assimp::ExportProperties*);
 #endif
 
+#ifndef ASSIMP_BUILD_NO_CTM_EXPORTER
+void ExportSceneCTM(const char* pFile, IOSystem* pIOSystem, const aiScene* pScene, const Assimp::ExportProperties*);
+#endif
+
 static void setupExporterArray(std::vector<Exporter::ExportFormatEntry> &exporters) {
 #ifndef ASSIMP_BUILD_NO_COLLADA_EXPORTER
 	exporters.push_back(Exporter::ExportFormatEntry("collada", "COLLADA - Digital Asset Exchange Schema", "dae", &ExportSceneCollada));
@@ -218,6 +222,10 @@ static void setupExporterArray(std::vector<Exporter::ExportFormatEntry> &exporte
 
 #ifndef ASSIMP_BUILD_NO_ASSJSON_EXPORTER
 	exporters.push_back(Exporter::ExportFormatEntry("assjson", "Assimp JSON Document", "json", &ExportAssimp2Json, 0));
+#endif
+
+#ifndef ASSIMP_BUILD_NO_CTM_EXPORTER
+	exporters.push_back(Exporter::ExportFormatEntry("ctm", "Assimp ctm lib", "ctm", &ExportSceneCTM, 0));
 #endif
 }
 

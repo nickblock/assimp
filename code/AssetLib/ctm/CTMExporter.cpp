@@ -5,6 +5,7 @@
 
 #include "assimp/scene.h"
 #include <assimp/IOSystem.hpp>
+#include <assimp/Exporter.hpp>
 #include "CTMExporter.h"
 #include "openctm.h"
 
@@ -14,7 +15,7 @@ using std::vector;
 
 namespace Assimp {
 
-void ExportSceneCTM(const char* pFile, IOSystem* pIOSystem, const aiScene* pScene)
+void ExportSceneCTM(const char* pFile, IOSystem* pIOSystem, const aiScene* pScene, const Assimp::ExportProperties*)
 {
   CTMExporter exporter(pFile, pScene);
 }
