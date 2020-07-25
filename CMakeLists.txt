@@ -328,6 +328,8 @@ ENDIF()
 INCLUDE (FindPkgMacros)
 INCLUDE (PrecompiledHeader)
 
+
+IF(NOT DEFINED CMAKE_RUNTIME_OUTPUT_DIRECTORY)
 # If this is an in-source build (CMAKE_SOURCE_DIR == CMAKE_BINARY_DIR),
 # write the library/executable files to the respective directories in the
 # source tree. During an out-of-source build, however, do not litter this
@@ -341,6 +343,9 @@ ELSE()
   SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
   SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
 ENDIF ()
+
+ENDIF()
+
 
 get_cmake_property(is_multi_config GENERATOR_IS_MULTI_CONFIG)
 
@@ -403,12 +408,14 @@ ELSE()
   endif()
 
   IF( UNIX )
-    # Use GNUInstallDirs for Unix predefined directories
-    INCLUDE(GNUInstallDirs)
 
-    SET( ASSIMP_LIB_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR})
-    SET( ASSIMP_INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_INCLUDEDIR})
-    SET( ASSIMP_BIN_INSTALL_DIR ${CMAKE_INSTALL_BINDIR})
+  # Use GNUInstallDirs for Unix predefined directories
+  INCLUDE(GNUInstallDirs)
+  
+  SET( ASSIMP_LIB_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR})
+  SET( ASSIMP_INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_INCLUDEDIR})
+  SET( ASSIMP_BIN_INSTALL_DIR ${CMAKE_INSTALL_BINDIR})
+  MESSAGE("ASSIMP_BIN_INSTALL_DIR " ${ASSIMP_BIN_INSTALL_DIR} )
   ELSE()
     # Cache these to allow the user to override them on non-Unix platforms
     SET( ASSIMP_LIB_INSTALL_DIR "lib" CACHE STRING
